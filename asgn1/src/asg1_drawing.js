@@ -83,7 +83,7 @@
 
 
 
-// current best code other got chopped 
+// current best other got chopped 
 
 function addTri(color, vertices) {
   var t = new Triangle();
