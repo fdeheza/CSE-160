@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>CSE 160 – Assignment 1</title>
+  <style>
+    body {
+      margin: 0;
+      background: #fff;
+      color: #000;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 16px;
+    }
+
+    p.info { font-size: 12px; color: #555; margin: 0 0 8px; }
+
+    #webgl { border: 1px solid #ccc; display: block; cursor: crosshair; }
+
+    #controls { margin-top: 10px; font-size: 14px; }
+    #controls > * { margin-bottom: 8px; }
+
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+    button {
+      padding: 3px 10px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      background: #f0f0f0;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    button:hover { background: #ddd; }
+    button.active { background: #cce; border-color: #88a; }
+
+    label { font-size: 13px; }
+    input[type=range] { width: 160px; }
+
+    #reference-img {
+      margin-top: 16px;
+      max-width: 300px;
+      border: 1px solid #ccc;
+      display: block;
+    }
+    #reference-img img { width: 100%; display: block; }
+    #reference-img p { font-size: 12px; color: #555; margin: 4px 0 0; }
+  </style>
+</head>
+<body onload="main()">
+  <canvas id="webgl" width="600" height="600">
+    Please use a browser that supports canvas.
+  </canvas>
+
+  <div id="controls">
+
+    <div class="row">
+      <button onclick="clearCanvas()">Clear Canvas</button>
+      <button onclick="drawMyPicture()">Draw My Picture</button>
+    </div>
+
+    <div>
+      <strong>Drawing Mode:</strong><br>
+      <div class="row" style="margin-top:4px;">
+        <button id="btn-point"    class="active" onclick="setShape('point')">Squares</button>
+        <button id="btn-triangle" onclick="setShape('triangle')">Triangles</button>
+        <button id="btn-circle"   onclick="setShape('circle')">Circles</button>
+      </div>
+    </div>
+
+    <div>
+      <strong>Shape Color:</strong><br>
+      <div class="row" style="margin-top:4px;">
+        <label>Red <input type="range" id="slider-r" min="0" max="100" value="100" oninput="updateColor()"></label>
+        <label>Green <input type="range" id="slider-g" min="0" max="100" value="100" oninput="updateColor()"></label>
+        <label>Blue <input type="range" id="slider-b" min="0" max="100" value="100" oninput="updateColor()"></label>
+      </div>
+    </div>
+
+    <div class="row">
+      <label>Shape Size: <input type="range" id="slider-size" min="1" max="100" value="10" oninput="updateSize()"></label>
+      <label>(Circles) Segment Count: <input type="range" id="slider-seg" min="3" max="64" value="12" oninput="updateSegments()"></label>
+    </div>
+
+  </div>
+
+  <div id="reference-img">
+    <img src="shark_drawing.jpeg" alt="shark reference">
+    <p>Reference drawing</p>
+  </div>
+
+  <script src="../lib/webgl-utils.js"></script>
+  <script src="../lib/webgl-debug.js"></script>
+  <script src="../lib/cuon-utils.js"></script>
+  <script src="Point.js"></script>
+  <script src="Triangle.js"></script>
+  <script src="Circle.js"></script>
+  <script src="asg1.js"></script>
+  <script src="asg1_drawing.js"></script>
+</body>
+</html>
