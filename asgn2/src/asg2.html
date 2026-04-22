@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CSE 160 – Assignment 2</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #ffffff;
+      color: #111;
+      font-family: sans-serif;
+      font-size: 14px;
+      padding: 20px;
+    }
+
+    h2 { font-size: 16px; font-weight: normal; margin-bottom: 4px; }
+    .byline { font-size: 13px; color: #555; margin-bottom: 16px; }
+
+    /* Two-column layout */
+    .layout {
+      display: flex;
+      align-items: flex-start;
+      gap: 32px;
+    }
+
+    /* Left: controls */
+    #controls {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 260px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 2px;
+    }
+
+    .row { display: flex; align-items: center; gap: 8px; }
+    .row label { width: 160px; font-size: 13px; }
+    .row input[type=range] { width: 140px; }
+    .row .val { font-size: 12px; color: #555; font-family: monospace; width: 38px; }
+
+    .btn-row { display: flex; gap: 8px; margin-top: 8px; }
+    button {
+      padding: 5px 16px;
+      border: 1px solid #aaa;
+      border-radius: 3px;
+      background: #f5f5f5;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    button:hover { background: #e8e8e8; }
+
+    #fps {
+      font-size: 13px;
+      color: #333;
+      margin-top: 10px;
+      font-family: monospace;
+    }
+
+    .hint { font-size: 11px; color: #888; margin-top: 4px; }
+
+    /* Right: canvas */
+    #canvas-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+
+    #webgl {
+      border: 1px solid #ccc;
+      cursor: grab;
+      display: block;
+    }
+    #webgl:active { cursor: grabbing; }
+  </style>
+</head>
+<body>
+
+  <h2>Francisco Deheza | fdeheza@ucsc.edu</h2>
+  <p > Notes: https://claude.ai/share/07519947-baba-4daa-bdd3-c87a8131ff47 </p>
+  <p >Drag on canvas to rotate, stop animation to use joint sliders </p>
+  <div class="layout">
+
+    <div id="controls">
+
+      <div class="section-label">View Rotation</div>
+      <div class="row">
+        <label>Camera Angle 1</label>
+        <input type="range" id="globalRotY" min="-180" max="180" value="180" step="1">
+        <span class="val" id="globalRotYVal">180°</span>
+      </div>
+      <div class="row">
+        <label>Camera Angle 2</label>
+        <input type="range" id="globalRotX" min="-85" max="85" value="-10" step="1">
+        <span class="val" id="globalRotXVal">-10°</span>
+      </div>
+
+      <div class="section-label">Arm Chain</div>
+      <div class="row">
+        <label>Shoulder (joint 1)</label>
+        <input type="range" id="armAngle" min="-60" max="60" value="30" step="1">
+        <span class="val" id="armAngleVal">30°</span>
+      </div>
+      <div class="row">
+        <label>Elbow (joint 2)</label>
+        <input type="range" id="elbowAngle" min="0" max="90" value="25" step="1">
+        <span class="val" id="elbowAngleVal">25°</span>
+      </div>
+
+      <div class="section-label">Leg Chain</div>
+      <div class="row">
+        <label>Hip (joint 1)</label>
+        <input type="range" id="legAngle" min="-60" max="60" value="30" step="1">
+        <span class="val" id="legAngleVal">30°</span>
+      </div>
+      <div class="row">
+        <label>Knee (joint 2)</label>
+        <input type="range" id="kneeAngle" min="0" max="90" value="20" step="1">
+        <span class="val" id="kneeAngleVal">20°</span>
+      </div>
+
+      <div class="btn-row">
+        <button id="animBtn">Animation On</button>
+      </div>
+
+      <div id="fps">FPS: --</div>
+
+    </div>
+
+    <div id="canvas-wrap">
+      <canvas id="webgl" width="500" height="500"></canvas>
+    </div>
+
+  </div>
+
+  <script src="../lib/webgl-utils.js"></script>
+  <script src="../lib/webgl-debug.js"></script>
+  <script src="../lib/cuon-utils.js"></script>
+  <script src="../lib/cuon-matrix-cse160.js"></script>
+  <script src="Cube.js"></script>
+  <script src="asg2.js"></script>
+  
+   <script>
+   main();
+  </script>
+</body>
+</html>
