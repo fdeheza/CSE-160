@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSE 160 Assignment 3 - Mario World</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #fff;
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+    }
+
+    #left-panel {
+      width: 280px;
+      min-width: 280px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      border-right: 1px solid #ccc;
+      overflow: hidden;
+    }
+
+    #left-panel p, #left-panel span { font-size: 13px; }
+
+    #name  { font-size: 15px; font-weight: bold; margin-bottom: 4px; }
+    #notes { margin-bottom: 16px; color: #333; }
+
+    #controls { flex: 1; }
+    #controls b { display: block; margin-bottom: 6px; }
+
+    .control-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 3px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 13px;
+    }
+    .control-row:last-child { border-bottom: none; }
+    .action { color: #555; }
+
+    #fps-section { margin-top: 16px; }
+    #fps-section span { font-size: 13px; }
+    #fps { font-weight: bold; }
+
+    #canvas-wrapper {
+      flex: 1;
+      position: relative;
+    }
+    canvas { display: block; width: 100%; height: 100%; }
+
+    #reticle {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px; height: 16px;
+      pointer-events: none;
+    }
+    .line { position: absolute; background: rgba(0,0,0,0.6); }
+    .line.h { width: 100%; height: 1px; top: 50%; transform: translateY(-50%); }
+    .line.v { width: 1px; height: 100%; left: 50%; transform: translateX(-50%); }
+
+    #click-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.35);
+      font-size: 13px;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+    #click-overlay.hidden { display: none; }
+  </style>
+</head>
+<body>
+
+  
+  <div id="left-panel">
+    <p id="name">Francisco Deheza | fdeheza@ucsc.edu</p>
+    <p id="notes">Notes: https://claude.ai/share/7f3d3887-45e1-4865-81c2-b666522ced0d</p>
+
+    <div id="controls">
+      <b>Controls</b>
+      <div class="control-row"><span>W A S D</span><span class="action">Move</span></div>
+      <div class="control-row"><span>Q / E</span><span class="action">Turn</span></div>
+      <div class="control-row"><span>Mouse</span><span class="action">Look</span></div>
+      <div class="control-row"><span>Space</span><span class="action">Jump</span></div>
+      <div class="control-row"><span>F</span><span class="action">Add block</span></div>
+      <div class="control-row"><span>R</span><span class="action">Remove block</span></div>
+      <div class="control-row"><span>Click</span><span class="action">Lock mouse</span></div>
+      <div class="control-row"><span>Esc</span><span class="action">Release mouse</span></div>
+    </div>
+
+    <div id="fps-section">
+      <span>FPS: <span id="fps">--</span></span>
+    </div>
+  </div>
+
+  <!-- canvas section -->
+  <div id="canvas-wrapper">
+    <canvas id="webgl"></canvas>
+    <div id="reticle">
+      <div class="line h"></div>
+      <div class="line v"></div>
+    </div>
+    <div id="click-overlay">Click</div>
+  </div>
+
+  <script src="../lib/cuon-utils.js"></script>
+  <script src="../lib/cuon-matrix-cse160.js"></script>
+  <script src="camera.js"></script>
+  <script src="cube.js"></script>
+  <script src="asg3.js"></script>
+</body>
+</html>
